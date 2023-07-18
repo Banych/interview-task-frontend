@@ -1,0 +1,10 @@
+@font-face {
+  font-family: Inter;
+  font-weight: 400;
+  background: #faf7f7;
+  src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+}
+
+body {
+  background: var(--main-colors-main-light-bg, #F3F4F9);
+}
