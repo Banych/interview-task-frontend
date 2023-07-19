@@ -17,6 +17,11 @@ $spacers: (
 $font-family-base: 'Inter', serif;
 $body-bg: #F3F4F9;
 $link-color: #9A9DA4;
+$nav-link-font-size: 0.875rem;
+$nav-link-font-weight: 500;
+$primary: #1952E1;
+$btn-font-size-sm: 0.75rem;
+$btn-line-height: 1rem;
 
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 
@@ -24,5 +29,12 @@ h3 {
   font-size: 24px;
   line-height: 32px;
   font-weight: 600;
+  margin: 0;
+}
+
+h6 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
   margin: 0;
 }

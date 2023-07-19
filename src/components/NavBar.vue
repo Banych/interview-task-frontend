@@ -1,22 +1,26 @@
 <template>
-  <ul class="nav nav-underline  px-5">
-    <li class="nav-item">
-      <router-link class="nav-link px-5 py-4" active-class="active"
-        exact-active-class="active" to="/">
-        Bus Lines
-      </router-link>
-    </li>
-    <li class="nav-item">
-      <router-link class="nav-link px-5 py-4" active-class="active"
-        exact-active-class="active" to="/stops">
-        Stops
-      </router-link>
-    </li>
-  </ul>
+  <MyCard :is-add-content-padding="false">
+    <ul class="nav nav-underline">
+      <li class="nav-item">
+        <router-link class="nav-link px-5 py-4" active-class="active"
+          exact-active-class="active" to="/">
+          Bus Lines
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link px-5 py-4" active-class="active"
+          exact-active-class="active" to="/stops">
+          Stops
+        </router-link>
+      </li>
+    </ul>
+  </MyCard>
 </template>
 
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
+
+import MyCard from "./MyCard.vue";
 
 </script>
 
