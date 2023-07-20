@@ -6,9 +6,9 @@
     </div>
 
     <div :class="{
-      'flex-grow-1': true,
-      'p-5 d-flex  flex-grow-1': isAddContentPadding,
-      'd-flex align-items-center justify-content-center placeholder-text': isPlaceholder,
+      'flex-grow-1  d-flex': true,
+      'p-5': isAddContentPadding,
+      'align-items-center justify-content-center placeholder-text': isPlaceholder,
     }">
       <slot></slot>
       <div v-if="isPlaceholder">
@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useSlots } from "vue";
+import { useSlots } from "vue";
 
 type MyCardProps = {
   isAddContentPadding?: boolean;

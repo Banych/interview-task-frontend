@@ -2,8 +2,8 @@
   <div class="d-flex flex-column gap-5 flex-grow-1">
     <BusLineSelect />
     <div class="d-flex flex-grow-1 gap-3">
-      <BusLineViewer />
-      <BusStopViewer />
+      <BusLineViewer class="mw-50" />
+      <BusStopViewer class="mw-50" />
     </div>
   </div>
 </template>
@@ -20,3 +20,9 @@ const store = useStore();
 // onMounted(() => {
 // })
 </script>
+
+<style scoped>
+.mw-50 {
+  max-width: calc(50% - 1rem);
+}
+</style>

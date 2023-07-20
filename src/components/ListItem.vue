@@ -2,6 +2,7 @@
   <button type="button" :class="{
     'py-4 px-5 button-item': true,
     'active': isActive,
+    'sort': isSort,
   }" @click="(e) => emit('click', e)">
     <slot></slot>
   </button>
@@ -14,12 +15,14 @@ type ButtonItemEvents = {
 
 type ButtonItemProps = {
   isActive?: boolean;
+  isSort?: boolean;
 }
 
 const emit = defineEmits<ButtonItemEvents>();
 
 withDefaults(defineProps<ButtonItemProps>(), {
   isActive: false,
+  isSort: false,
 })
 </script>
 
@@ -45,6 +48,11 @@ withDefaults(defineProps<ButtonItemProps>(), {
     left: 0;
     right: 0;
     bottom: 0;
+    background-color: #F3F4F9;
+  }
+
+  &.sort::after {
+    content: '';
     background-color: #E2E4EA;
   }
 }

@@ -1,14 +1,10 @@
-export type BusStop = {
-  line: number;
-  stop: string;
-  order: number;
-  time: string;
-}
+import { BusStop } from "../types/BusStop";
+import { GetStopsByLine } from "./getters";
 
 export type State = {
   stops: BusStop[];
   selectedLine?: number;
-  selectedStop?: string;
+  selectedStop?: GetStopsByLine;
 }
 
 export const state: State = {

@@ -1,27 +1,34 @@
 import { ActionTree, ActionContext } from 'vuex'
-import { BusStop, State } from './state'
+import { State } from './state'
 import { MUTATIONS, Mutations } from './mutations'
 import axios from "axios";
+import { BusStop } from "../types/BusStop";
+import { GetStopsByLine } from "./getters";
 
 axios.defaults.baseURL = 'http://localhost:3000/';
 
 export const ACTIONS = {
   LOAD_STOPS: 'LOAD_STOPS',
   SET_SELECTED_LINE: 'SET_SELECTED_LINE',
-  SET_SELECTED_STOP: 'SET_SELECTED_STOP'
+  SET_SELECTED_STOP: 'SET_SELECTED_STOP',
+  CLEAR_SELECTED_LINE: 'CLEAR_SELECTED_LINE',
+  CLEAR_SELECTED_STOP: 'CLEAR_SELECTED_STOP',
 } as const;
 
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(
     key: K,
-    payload: Parameters<Mutations[ K ]>[ 1 ]
+    payload?: Parameters<Mutations[ K ]>[ 1 ]
   ): ReturnType<Mutations[ K ]>
 } & Omit<ActionContext<State, State>, 'commit'>
 
-export interface Actions {
+export type Actions = {
   [ ACTIONS.LOAD_STOPS ](context: AugmentedActionContext): Promise<void>;
   [ ACTIONS.SET_SELECTED_LINE ](context: AugmentedActionContext, payload: number): void;
-  [ ACTIONS.SET_SELECTED_STOP ](context: AugmentedActionContext, payload: string): void;
+  [ ACTIONS.SET_SELECTED_STOP ](context: AugmentedActionContext, payload: GetStopsByLine): void;
+  [ ACTIONS.CLEAR_SELECTED_LINE ](context: AugmentedActionContext): void;
+  [ ACTIONS.CLEAR_SELECTED_STOP ](context: AugmentedActionContext): void;
+
 }
 
 export const actions: ActionTree<State, State> & Actions = {
@@ -36,5 +43,11 @@ export const actions: ActionTree<State, State> & Actions = {
   },
   [ ACTIONS.SET_SELECTED_STOP ](context, payload) {
     context.commit('SET_SELECTED_STOP', payload);
+  },
+  [ ACTIONS.CLEAR_SELECTED_LINE ](context) {
+    context.commit('CLEAR_SELECTED_LINE');
+  },
+  [ ACTIONS.CLEAR_SELECTED_STOP ](context) {
+    context.commit('CLEAR_SELECTED_STOP');
   }
 }

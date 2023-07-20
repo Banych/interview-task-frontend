@@ -1,6 +1,9 @@
 <template>
-  <button type="button" class="btn btn-primary btn-sm px-3 py-2"
-    :style="buttonStyles" @click="(e) => emits('onClick', e)">
+  <button type="button" :class="{
+    'btn btn-primary btn-sm px-3 py-2': true,
+    active: isPressed
+  }" data-bs-toggle="button" :aria-pressed="isPressed" :style="buttonStyles"
+    @click="(e) => emits('onClick', e)">
     <slot></slot>
   </button>
 </template>
@@ -10,6 +13,7 @@ import { reactive } from "vue";
 
 type MyButtonProps = {
   width?: 'auto' | `${number}${'px' | 'rem' | 'em'}`;
+  isPressed?: boolean;
 }
 
 type MyButtonEvents = {
@@ -17,7 +21,8 @@ type MyButtonEvents = {
 }
 
 const props = withDefaults(defineProps<MyButtonProps>(), {
-  width: 'auto'
+  width: 'auto',
+  isPressed: false,
 });
 
 const emits = defineEmits<MyButtonEvents>();

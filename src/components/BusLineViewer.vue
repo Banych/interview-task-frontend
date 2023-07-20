@@ -1,5 +1,5 @@
 <template>
-  <MyCard :is-add-content-padding="selectedLine !== undefined"
+  <MyCard :is-add-content-padding="false"
     :is-placeholder="selectedLine === undefined" class="d-flex flex-grow-1">
     <template #placeholder>
       Please select the bus line first
