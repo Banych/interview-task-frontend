@@ -1,6 +1,6 @@
 <template>
   <MyCard :is-add-content-padding="false">
-    <ul class="nav nav-underline">
+    <ul class="nav nav-underline px-5">
       <li class="nav-item">
         <router-link class="nav-link px-5 py-4" active-class="active"
           exact-active-class="active" to="/">
