@@ -11,7 +11,7 @@
         <div class="d-flex flex-column">
           <ListItem v-for="stop in sortedStops" :key="stop.stop"
             :is-active="stop.stop === selectedStop?.stop" class=""
-            @click="store.dispatch('SET_SELECTED_STOP', stop)">
+            @click="isSelectable && store.dispatch('SET_SELECTED_STOP', stop)">
             {{ stop.stop }}
           </ListItem>
         </div>
@@ -30,9 +30,12 @@ import SortIcon from './SortIcon.vue'
 
 type BusStopsListProps = {
   stops: GetStopsByLine[];
+  isSelectable?: boolean;
 }
 
-const props = defineProps<BusStopsListProps>();
+const props = withDefaults(defineProps<BusStopsListProps>(), {
+  isSelectable: true,
+});
 
 const sort = ref<SortType>('asc');
 const store = useStore();

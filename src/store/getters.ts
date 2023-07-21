@@ -1,15 +1,15 @@
 import { GetterTree } from "vuex";
 import { State } from "./state";
 import { BusStop } from "../types/BusStop";
-import { SortType } from "../types/SortType";
 
 export type GetStopsByLine = Omit<BusStop, 'time'> & {
-  schedule: string[];
+  schedule?: string[];
 };
 
 export type Getters = {
   getLines: (state: State) => number[];
   getStopsByLine: (state: State) => (line: BusStop[ 'line' ]) => GetStopsByLine[];
+  getFilteredBusStopNames: (state: State) => (filter: string) => GetStopsByLine[];
 }
 
 export const getters: GetterTree<State, State> & Getters = {
@@ -28,7 +28,7 @@ export const getters: GetterTree<State, State> & Getters = {
               stop: next.stop,
               line: next.line,
               order: next.order,
-              schedule: [ ...current.schedule, next.time ].sort()
+              schedule: [ ...current.schedule || [], next.time ].sort()
             });
         } else {
           accum.set(next.stop, {
@@ -40,4 +40,7 @@ export const getters: GetterTree<State, State> & Getters = {
         }
         return accum;
       }, new Map<string, GetStopsByLine>()).values() ],
+  getFilteredBusStopNames: (state) => (filter) =>
+    state.stops
+      .filter(stop => stop.stop.includes(filter)),
 };
