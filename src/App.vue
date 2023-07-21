@@ -12,4 +12,12 @@
 import { RouterView } from "vue-router";
 
 import NavBar from '@/components/NavBar.vue';
+import { onMounted } from "vue";
+import { useStore } from "./store";
+
+const store = useStore();
+
+onMounted(() => {
+    store.dispatch('LOAD_STOPS')
+})
 </script>

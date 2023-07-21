@@ -22,15 +22,17 @@
 
 <script setup lang="ts" generic="T">
 import { computed, ref } from "vue";
+
 import { useStore } from "../store";
-import ListItem from "./ListItem.vue";
-import { SortType } from "../types/SortType";
-import SortIcon from './SortIcon.vue'
 import { Getters } from "../store/getters";
+import { SortType } from "../types/SortType";
+import ListItem from "./ListItem.vue";
+import SortIcon from './SortIcon.vue'
 
 type BusStopsListProps = {
   stops: ReturnType<ReturnType<Getters[ 'getStopsByLine' ]>>;
   isSelectable?: boolean;
+  defaultSort?: SortType;
 }
 
 type BusStopsListEvents = {
@@ -39,11 +41,12 @@ type BusStopsListEvents = {
 
 const props = withDefaults(defineProps<BusStopsListProps>(), {
   isSelectable: true,
+  defaultSort: 'asc',
 });
 
 const emit = defineEmits<BusStopsListEvents>();
 
-const sort = ref<SortType>('asc');
+const sort = ref<SortType>(props.defaultSort);
 const store = useStore();
 
 const selectedStop = computed(() => store.state.selectedStop)

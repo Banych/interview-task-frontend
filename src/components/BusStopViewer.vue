@@ -29,9 +29,9 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+
 import { useStore } from "../store";
 import ListItem from "./ListItem.vue";
-
 import MyCard from "./MyCard.vue";
 
 const store = useStore();

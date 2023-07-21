@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
+import { ref } from "vue";
 
 type MyButtonProps = {
   width?: 'auto' | `${number}${'px' | 'rem' | 'em'}`;
@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<MyButtonProps>(), {
 
 const emits = defineEmits<MyButtonEvents>();
 
-const buttonStyles = reactive({
+const buttonStyles = ref({
   width: props.width
 });
 </script>

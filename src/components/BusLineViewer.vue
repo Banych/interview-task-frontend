@@ -14,8 +14,8 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { useStore } from "../store";
 
+import { useStore } from "../store";
 import MyCard from "./MyCard.vue";
 import BusStopsList from "./BusStopsList.vue";
 import { Getters } from "../store/getters";

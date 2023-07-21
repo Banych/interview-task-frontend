@@ -13,7 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
+
 import MyCard from "@/components/MyCard.vue";
 import MyButton from "@/components/MyButton.vue";
 import { useStore } from "@/store";
@@ -30,8 +31,4 @@ const click = (line: number) => {
     store.dispatch('SET_SELECTED_LINE', line);
   }
 }
-
-onMounted(() => {
-  store.dispatch('LOAD_STOPS')
-})
 </script>

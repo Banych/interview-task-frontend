@@ -27,7 +27,6 @@ type MyCardProps = {
 }
 const slots = useSlots();
 
-
 withDefaults(defineProps<MyCardProps>(), {
   isAddContentPadding: true,
   isPlaceholder: false,

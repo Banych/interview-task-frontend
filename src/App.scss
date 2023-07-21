@@ -22,6 +22,12 @@ $nav-link-font-weight: 500;
 $primary: #1952E1;
 $btn-font-size-sm: 0.75rem;
 $btn-line-height: 1rem;
+$input-border-radius-sm: 0.25rem;
+$input-padding-y-sm: 0.875rem;
+$input-padding-x-sm: 1rem;
+$input-border-color: #E2E4EA;
+$input-bg: transparent;
+$input-focus-box-shadow: none;
 
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 
