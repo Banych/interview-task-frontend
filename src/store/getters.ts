@@ -1,4 +1,5 @@
 import { GetterTree } from "vuex";
+
 import { State } from "./state";
 import { BusStop } from "../types/BusStop";
 

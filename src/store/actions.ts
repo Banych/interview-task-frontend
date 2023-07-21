@@ -1,7 +1,8 @@
+import axios from "axios";
+
 import { ActionTree, ActionContext } from 'vuex'
 import { State } from './state'
 import { MUTATIONS, Mutations } from './mutations'
-import axios from "axios";
 import { BusStop } from "../types/BusStop";
 
 axios.defaults.baseURL = 'http://localhost:3000/';
