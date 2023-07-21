@@ -3,7 +3,6 @@ import { State } from './state'
 import { MUTATIONS, Mutations } from './mutations'
 import axios from "axios";
 import { BusStop } from "../types/BusStop";
-import { GetStopsByLine } from "./getters";
 
 axios.defaults.baseURL = 'http://localhost:3000/';
 
@@ -25,7 +24,7 @@ type AugmentedActionContext = {
 export type Actions = {
   [ ACTIONS.LOAD_STOPS ](context: AugmentedActionContext): Promise<void>;
   [ ACTIONS.SET_SELECTED_LINE ](context: AugmentedActionContext, payload: number): void;
-  [ ACTIONS.SET_SELECTED_STOP ](context: AugmentedActionContext, payload: GetStopsByLine): void;
+  [ ACTIONS.SET_SELECTED_STOP ](context: AugmentedActionContext, payload: string): void;
   [ ACTIONS.CLEAR_SELECTED_LINE ](context: AugmentedActionContext): void;
   [ ACTIONS.CLEAR_SELECTED_STOP ](context: AugmentedActionContext): void;
 

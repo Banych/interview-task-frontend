@@ -10,8 +10,8 @@
       <div class="h-0">
         <div class="d-flex flex-column">
           <ListItem v-for="stop in sortedStops" :key="stop.stop"
-            :is-active="stop.stop === selectedStop?.stop" class=""
-            @click="isSelectable && store.dispatch('SET_SELECTED_STOP', stop)">
+            :is-active="stop.stop === selectedStop"
+            @click="handleClickItem(stop)">
             {{ stop.stop }}
           </ListItem>
         </div>
@@ -23,36 +23,39 @@
 <script setup lang="ts" generic="T">
 import { computed, ref } from "vue";
 import { useStore } from "../store";
-import { GetStopsByLine } from "../store/getters";
 import ListItem from "./ListItem.vue";
 import { SortType } from "../types/SortType";
 import SortIcon from './SortIcon.vue'
+import { Getters } from "../store/getters";
 
 type BusStopsListProps = {
-  stops: GetStopsByLine[];
+  stops: ReturnType<ReturnType<Getters[ 'getStopsByLine' ]>>;
   isSelectable?: boolean;
+}
+
+type BusStopsListEvents = {
+  (event: 'clickItem', item: BusStopsListProps[ 'stops' ][ number ]): void;
 }
 
 const props = withDefaults(defineProps<BusStopsListProps>(), {
   isSelectable: true,
 });
 
+const emit = defineEmits<BusStopsListEvents>();
+
 const sort = ref<SortType>('asc');
 const store = useStore();
 
 const selectedStop = computed(() => store.state.selectedStop)
-const sortedStops = computed(() => {
-  const sorted = [ ...props.stops ].sort((a, b) => {
-    if (a.stop < b.stop) {
-      return -1;
-    }
-    if (a.stop > b.stop) {
-      return 1;
-    }
-    return 0;
-  });
-  return sort.value === 'desc' ? sorted.reverse() : sorted;
-})
+const sortedStops = computed(() =>
+  [ ...props.stops ].sort((a, b) =>
+    sort.value === 'asc' ? a.order - b.order : b.order - a.order
+  )
+)
+
+const handleClickItem = (item: BusStopsListProps[ 'stops' ][ number ]) => {
+  props.isSelectable && emit('clickItem', item);
+}
 </script>
 
 <style scoped lang="scss">

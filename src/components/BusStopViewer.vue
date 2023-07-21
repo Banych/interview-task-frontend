@@ -5,7 +5,7 @@
       {{ placeholder }}
     </template>
     <template #header>
-      <h6>Bus Stop: {{ selectedStop?.stop }}</h6>
+      <h6>Bus Stop: {{ selectedStop }}</h6>
     </template>
     <div v-if="selectedStop" class="d-flex flex-column flex-grow-1">
       <ListItem>
@@ -13,10 +13,11 @@
           Time
         </div>
       </ListItem>
-      <div class="d-flex flex-column flex-grow-1 overflow-auto">
+      <div class="d-flex flex-column flex-grow-1 overflow-auto"
+        :key="`${selectedLine}${selectedStop}`">
         <div class="h-0">
           <div class="d-flex flex-column">
-            <ListItem v-for="time in selectedStop.schedule" :key="time">
+            <ListItem v-for="time in schedule" :key="time">
               {{ time }}
             </ListItem>
           </div>
@@ -37,6 +38,11 @@ const store = useStore();
 
 const selectedLine = computed(() => store.state.selectedLine)
 const selectedStop = computed(() => store.state.selectedStop)
+const schedule = computed(() =>
+  selectedStop.value && selectedLine.value
+    ? store.getters.getScheduleForStop(selectedStop.value, selectedLine.value)
+    : []
+)
 const placeholder = computed(() => {
   switch (true) {
     case selectedLine.value && !selectedStop.value:

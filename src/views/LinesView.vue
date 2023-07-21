@@ -9,16 +9,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
-import { useStore } from "@/store";
 import BusLineSelect from "../components/BusLineSelect.vue";
 import BusLineViewer from "../components/BusLineViewer.vue";
 import BusStopViewer from "../components/BusStopViewer.vue";
-
-const store = useStore();
-
-// onMounted(() => {
-// })
 </script>
 
 <style scoped>

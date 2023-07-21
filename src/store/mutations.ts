@@ -1,7 +1,6 @@
 import { MutationTree } from 'vuex'
 import { State } from './state'
 import { BusStop } from "../types/BusStop";
-import { GetStopsByLine } from "./getters";
 
 export const MUTATIONS = {
   SET_STOPS: 'SET_STOPS',
@@ -14,7 +13,7 @@ export const MUTATIONS = {
 export type Mutations<S = State> = {
   [ MUTATIONS.SET_STOPS ](state: S, payload: BusStop[]): void;
   [ MUTATIONS.SET_SELECTED_LINE ](state: S, payload: number): void;
-  [ MUTATIONS.SET_SELECTED_STOP ](state: S, payload: GetStopsByLine): void;
+  [ MUTATIONS.SET_SELECTED_STOP ](state: S, payload: string): void;
   [ MUTATIONS.CLEAR_SELECTED_LINE ](state: S): void;
   [ MUTATIONS.CLEAR_SELECTED_STOP ](state: S): void;
 }

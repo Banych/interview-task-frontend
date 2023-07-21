@@ -7,8 +7,8 @@
     <template #header>
       <h6>Bus line: {{ selectedLine }}</h6>
     </template>
-    <BusStopsList v-if="selectedLine !== undefined"
-      :stops="stopsForSelectedLine" />
+    <BusStopsList v-if="selectedLine !== undefined" :stops="stopsForSelectedLine"
+      @clickItem="handleListItemClick" :key="selectedLine" />
   </MyCard>
 </template>
 
@@ -18,6 +18,7 @@ import { useStore } from "../store";
 
 import MyCard from "./MyCard.vue";
 import BusStopsList from "./BusStopsList.vue";
+import { Getters } from "../store/getters";
 
 const store = useStore();
 
@@ -26,4 +27,8 @@ const stopsForSelectedLine = computed(() => selectedLine.value !== undefined
   ? store.getters.getStopsByLine(selectedLine.value)
   : []
 );
+
+const handleListItemClick = (item: ReturnType<ReturnType<Getters[ 'getStopsByLine' ]>>[ number ]) => {
+  store.dispatch('SET_SELECTED_STOP', item.stop);
+}
 </script>
